@@ -5,6 +5,7 @@
     <title>Главная страница</title>
 </head>
 <body>
+<h1>Все кандидаты</h1>
 {% for i in user%}
     <p><a href="/candidate/{{ i.id }}">{{ i.name }}</a></p>
 {% endfor %}
