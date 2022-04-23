@@ -1,42 +1,41 @@
 import json
 
 
-def get_json():
+def load_candidates_from_json():
     with open('candidates.json', 'r', encoding='utf8') as file:
         user_d = json.load(file)
     return user_d
 
 
-user_dict = get_json()
+user_dict = load_candidates_from_json()
 
 
 def search_id(index):
     """Ищет пользователя по id"""
-    for r in range(len(user_dict)):
-        if index is user_dict[r]["id"]:
-            c = user_dict[r]
-            return c
+    for r in user_dict:
+        if index == r["id"]:
+            return r
 
 
 def add_skills_dict(sk):
     """Выполняет поиск навыков в skills"""
     skill_dict = []
     sk = sk.lower()
-    for value in user_dict.values():
-        b = value["skills"].lower()
-        s = b.split(", ")
-        if sk in s:
-            skill_dict.append(value)
-    return skill_dict
-
-
-def get_candidates_by_name(sk):
-    """возвращает пользователя по Name"""
-    skill_dict = []
-    sk = sk.lower()
     for value in user_dict:
-        b = value["skills"].lower()
-        s = b.split(", ")
-        if sk in s:
+        b = value["skills"].lower().split(", ")
+        if sk in b:
             skill_dict.append(value)
     return skill_dict
+
+
+def get_candidates_by_name(name):
+    """возвращает пользователя по Name"""
+    name = name.lower()
+    name_dict = []
+    for value in user_dict:
+        b = value["name"].lower()
+        if name in b:
+            name_dict.append(value)
+    return name_dict
+
+
